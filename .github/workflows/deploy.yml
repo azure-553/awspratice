@@ -18,7 +18,7 @@ jobs:
           aws-secret-access-key: B6fPD3vq4JCnylGoNxJjS/REQsNAOcwpsSuySD/5
           aws-region: us-east-1
       - name: Deploy
-        uses: appleboy/ssh-actions@master
+        uses: appleboy/ssh-action@master
         with:
           host: ec2-44-203-0-105.compute-1.amazonaws.com
           username: ubuntu
