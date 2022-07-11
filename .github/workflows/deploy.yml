@@ -17,11 +17,15 @@ jobs:
           aws-access-key-id: AKIAUZKGXXXOYKYRGZ5M
           aws-secret-access-key: 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
           aws-region: us-east-1
-      - name: Create CodeDeploy Deployments
-        id: deploy
-        run: |
-          aws deploy create-deployment \
-          --application-name myfirstapp \
-          --deployment-group-name bsm-deploy-app \
-          --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --github-location repository=${{github.repository}},commitId=${{github.sha}}
+      - name: Deploy
+        uses: appleboy/ssh-actions@master
+        with:
+          host: ec2-44-203-0-105.compute-1.amazonaws.com
+          username: ubuntu
+          key: ${{ secrets.PEM }}
+          port: 22
+          script: |
+            cd ./awspratice
+            ./pull.sh
+            ./install.sh
+            ./start.sh
